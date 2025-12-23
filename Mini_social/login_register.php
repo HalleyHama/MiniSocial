@@ -83,7 +83,7 @@
                     ?>
                 </div>
 
-                <form class="register-form" method="POST" action="register.php">
+                <form class="register-form" method="POST" action="register.php" >
                     <div class="form-group">
                         <label>Nom d'utilisateur</label>
                         <input type="text" id="reg-username" name="reg-username" placeholder="Entrez votre nom" required>
@@ -117,8 +117,15 @@
     <script>
         const loginForm = document.getElementById('login-form-container');
         const registerForm = document.getElementById('register-form-container');
+
         const showRegisterLink = document.getElementById('show-register');
         const showLoginLink = document.getElementById('show-login');
+
+        const password_register = document.getElementById('reg-password').value;
+        const passwordConfirm = document.getElementById('reg-password-confirm').value;
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
         // Basculer vers le formulaire d'inscription
         showRegisterLink.addEventListener('click', (e) => {
@@ -132,35 +139,22 @@
             loginForm.style.display = 'block';
         });
 
-        // Login simple
-        function handleLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            if(username ==="" || password ==="") {
-                alert("Veuillez remplir tous les champs !");
-                return;
-            } else {
-                alert("données de connexion envoyées !");
-                return;
-            }
-        }
-
-        // Register simple
-        function handleRegister() {
-            const username = document.getElementById('reg-username').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const password = document.getElementById('reg-password').value;
+        // Validation du mot de passe lors de l'inscription
+        function  handleRegister(){
+            const password_register = document.getElementById('reg-password').value;
             const passwordConfirm = document.getElementById('reg-password-confirm').value;
-
-            if(password !== passwordConfirm) {
-                alert("Les mots de passe ne correspondent pas !");
-                return;
+            if(password_register !== passwordConfirm){
+                alert("Les mots de passe ne correspondent pas.");
+                return false;
             }
-            else {
-                alert("données d'inscription envoyées !");
-                return;
+            else{
+                alert("Infos envoyées avec succès !");
+                return true;
             }
         }
+
+
     </script>
 </body>
 </html>
+

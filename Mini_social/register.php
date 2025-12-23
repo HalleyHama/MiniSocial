@@ -8,6 +8,13 @@
         $username = trim($_POST["reg-username"]);
         $email = trim($_POST["reg-email"]);
         $password = $_POST["reg-password"];
+        $confirm_password = $_POST["reg-password-confirm"];
+       if($password !== $confirm_password){
+            session_start();
+            $_SESSION['error_register'] = "Les mots de passe ne correspondent pas.";
+            header("Location: login_register.php");
+            exit();
+        }
         $token = bin2hex(random_bytes(16));
         $token_expires_at = date("Y-m-d H:i:s", strtotime('10 minutes'));
         $link = "https://dionne-unfenestrated-overbounteously.ngrok-free.dev/Mini_social/confirm_email.php?token=$token";

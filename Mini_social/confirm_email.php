@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-// Fonction pour afficher le message dans un style simple et propre
 function showMessage($title, $message, $success = true) {
     $color = $success ? "#4CAF50" : "#F44336"; // vert = succès, rouge = erreur
     echo "
@@ -77,11 +76,11 @@ if ($current_time > $user['token_expires_at']) {
 }
 
 // Activer le compte
-$pdo->prepare("UPDATE users SET is_verified = 1, token = NULL, token_expires_at = NULL WHERE id = ?")
-    ->execute([$user['id']]);
+$active = $pdo->prepare("UPDATE utilisateurs SET is_active = 1, token = NULL, token_expires_at = NULL WHERE id = ?");
+$active->execute([$user['id']]);
 
 // Redirection après succès
-header("Location: login.php?confirmed=1");
+header("Location: main/dashboard.php?confirmed=1");
 exit;
 
 ?>
